@@ -1,0 +1,5 @@
+# List required packages in this file, one per line.
+prometheus_client
+flatdict
+requests
+xmltodict

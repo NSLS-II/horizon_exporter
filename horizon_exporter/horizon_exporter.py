@@ -7,7 +7,7 @@ from prometheus_client.metrics_core import (
     GaugeMetricFamily, InfoMetricFamily, CounterMetricFamily)
 
 # Horizon API Specific imports
-from horizon_api import horizon_connection_server, horizon_uag
+from .horizon_api import horizon_connection_server, horizon_uag
 
 
 class HorizonExporter:
@@ -167,9 +167,13 @@ class HorizonExporter:
                     yield metric
 
 
-if __name__ == '__main__':
+def main():
     REGISTRY.register(HorizonExporter())
 
     start_wsgi_server(18000)
     while True:
         time.sleep(1)
+
+
+if __name__ == '__main__':
+    main()

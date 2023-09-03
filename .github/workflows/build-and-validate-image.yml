@@ -17,7 +17,7 @@ jobs:
          chmod +x /usr/local/bin/canary
 
      - name: Build Container
-       run: docker build -t NSLS-II/horizon_exporter:latest .
+       run: docker build -t nsls-ii/horizon_exporter:latest .
 
      - name: Validate container
-       run: canary validate --file canary-validator.yml NSLS-II/horizon_exporter:latest
+       run: canary validate --file canary-validator.yml nsls-ii/horizon_exporter:latest

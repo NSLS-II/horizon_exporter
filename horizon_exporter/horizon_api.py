@@ -16,14 +16,22 @@ class horizon_uag:
 
         self._session = requests.Session()
         self._session.auth = (username, password)
+        self._data = None
 
     def _get_xml(self, endpoint):
         response = self._session.get(f"{self._url}{endpoint}")
+        print(response.content)
         data = xmltodict.parse(response.content)
+        print(json.dumps(data, indent=2))
         return data
 
-    def get_monitor(self):
-        self._get_xml("/rest/v1/monitor/stats")
+    def get_monitor(self, host):
+        self._url = f"https://{host}"
+        print(self._url)
+        self._data = self._get_xml("/rest/v1/monitor/stats")
+
+    def get_data(self):
+        return self._data
 
 
 class horizon_connection_server:
@@ -90,3 +98,6 @@ class horizon_connection_server:
 
     def get_monitor_connection_servers(self):
         return self._get("/rest/monitor/v3/connection-servers")
+
+    def get_inventory_sessions(self):
+        return self._get("/rest/inventory/v1/sessions")

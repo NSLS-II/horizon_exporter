@@ -51,7 +51,8 @@ setup(
     packages=find_packages(exclude=["docs", "tests"]),
     entry_points={
         'console_scripts': [
-            'horizon_exporter=horizon_exporter.horizon_exporter:main'
+            'horizon_exporter=horizon_exporter.horizon_exporter:main',
+            'uag_exporter=horizon_exporter.uag_exporter:main'
         ]
     },
     include_package_data=True,

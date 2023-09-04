@@ -7,13 +7,12 @@ from prometheus_client.metrics_core import (
     GaugeMetricFamily, InfoMetricFamily, CounterMetricFamily)
 
 # Horizon API Specific imports
-from .horizon_api import horizon_connection_server, horizon_uag
+from .horizon_api import horizon_connection_server
 
 
 class HorizonExporter:
     def __init__(self):
         self.horizon = horizon_connection_server()
-        self.uag = horizon_uag()
 
     def _create_metric_list(self):
 
@@ -120,6 +119,8 @@ class HorizonExporter:
                 labels=self._label_names['connection_servers']),
         }
 
+        self.metric_list['sessions'] = {}
+
     def collect(self):
         self._create_metric_list()
 
@@ -135,6 +136,7 @@ class HorizonExporter:
 
         api_data = {
             'gateways': self.horizon.get_monitor_gateways(),
+            'sessions': self.horizon.get_inventory_sessions(),
             'connection_servers': conn
         }
 
